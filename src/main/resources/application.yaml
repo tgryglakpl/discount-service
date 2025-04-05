@@ -1,0 +1,34 @@
+server.port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/discountservice
+    username: "admin"
+    password: "admin"
+    hikari:
+      maximum-pool-size: 10
+  liquibase:
+    change-log: classpath:db/changelog.yaml
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints.web.exposure.include: health,info
+  endpoint:
+    health:
+      group:
+        readiness.include: readinessState,ping,diskSpace,db
+        liveness.include: livenessState
+      show-components: always
+  health:
+    livenessstate.enabled: true
+    readinessstate.enabled: true
+
+
+

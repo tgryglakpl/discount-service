@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - includeAll:
+      path: db/changesets/schema/
+      labels: V1
+      errorIfMissingOrEmpty: true
